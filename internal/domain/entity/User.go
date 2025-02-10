@@ -1,8 +1,7 @@
 package entity
 
 import (
-	"API_YuGiOh/pkg/entity"
-
+	"github.com/Erick-Fernandes-dev/API_YuGiOh_GO/pkg/entity"
 	"golang.org/x/crypto/bcrypt"
 )
 

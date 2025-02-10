@@ -1,13 +1,13 @@
 package strategy
 
 import (
-	"API_YuGiOh/internal/application/validation"
-	"API_YuGiOh/internal/domain/entity"
-	ID "API_YuGiOh/pkg/entity"
+	"github.com/Erick-Fernandes-dev/API_YuGiOh_GO/internal/application/validation"
+	C "github.com/Erick-Fernandes-dev/API_YuGiOh_GO/internal/domain/entity"
+	pkg "github.com/Erick-Fernandes-dev/API_YuGiOh_GO/pkg/entity"
 )
 
 type ValidationStep interface {
-	Validate(c *entity.Card) error
+	Validate(c *C.Card) error
 }
 
 // Structs de validação
@@ -20,48 +20,48 @@ type ErrCardPriceInvalid struct{}
 
 // Implementações concretas
 
-func (v IDValidation) Validate(c *entity.Card) error {
+func (v IDValidation) Validate(c *C.Card) error {
 
 	if c.ID.String() == "" {
 		return validation.ErrIDIsRequired
 	}
 
-	if _, err := ID.ParseID(c.ID.String()); err != nil {
+	if _, err := pkg.ParseID(c.ID.String()); err != nil {
 		return validation.ErrInvalidID
 	}
 
 	return nil
 }
 
-func (v ErrNameIsRequired) Validate(c *entity.Card) error {
+func (v ErrNameIsRequired) Validate(c *C.Card) error {
 	if c.Name == "" {
 		return validation.ErrNameIsRequired
 	}
 	return nil
 }
 
-func (v ErrCardTypeIsRequired) Validate(c *entity.Card) error {
+func (v ErrCardTypeIsRequired) Validate(c *C.Card) error {
 	if c.Type == "" {
 		return validation.ErrCardTypeIsRequired
 	}
 	return nil
 }
 
-func (v ErrCardLevelIsRequired) Validate(c *entity.Card) error {
+func (v ErrCardLevelIsRequired) Validate(c *C.Card) error {
 	if c.Level == 0 {
 		return validation.ErrCardLevelIsRequired
 	}
 	return nil
 }
 
-func (v ErrCardPriceIsRequired) Validate(c *entity.Card) error {
+func (v ErrCardPriceIsRequired) Validate(c *C.Card) error {
 	if c.CardPrices == nil {
 		return validation.ErrCardPriceIsRequired
 	}
 	return nil
 }
 
-func (v ErrCardPriceInvalid) Validate(c *entity.Card) error {
+func (v ErrCardPriceInvalid) Validate(c *C.Card) error {
 	for _, cp := range c.CardPrices {
 		if cp.TcgplayerPrice == 0 {
 			return validation.ErrCardPriceInvalid

@@ -1,9 +1,6 @@
 package entity
 
-import (
-	"API_YuGiOh/internal/infra/strategy"
-	"API_YuGiOh/pkg/entity"
-)
+import "github.com/Erick-Fernandes-dev/API_YuGiOh_GO/pkg/entity"
 
 type Card struct {
 	ID         entity.ID   `json:"id"`
@@ -35,25 +32,4 @@ func NewCard(name, cardType, desc string, atk, def, level int, race, atribute, a
 		CardImages: cardImages,
 		CardPrices: cardPrices,
 	}, nil
-}
-
-func (c *Card) Validate() error {
-
-	validations := []strategy.ValidationStep{
-		strategy.IDValidation{},
-		strategy.ErrNameIsRequired{},
-		strategy.ErrCardTypeIsRequired{},
-		strategy.ErrCardLevelIsRequired{},
-		strategy.ErrCardPriceIsRequired{},
-		strategy.ErrCardPriceInvalid{},
-	}
-
-	for _, validation := range validations {
-		if err := validation.Validate(c); err != nil {
-			return err
-		}
-	}
-
-	return nil
-
 }

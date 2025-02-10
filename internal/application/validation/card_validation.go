@@ -1,6 +1,11 @@
 package validation
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/Erick-Fernandes-dev/API_YuGiOh_GO/internal/domain/entity"
+	"github.com/Erick-Fernandes-dev/API_YuGiOh_GO/internal/infra/strategy"
+)
 
 // Validação de erro
 var (
@@ -12,3 +17,24 @@ var (
 	ErrCardPriceIsRequired = errors.New("Card Price is required")
 	ErrCardPriceInvalid    = errors.New("Card Price is invalid")
 )
+
+func (c *entity.Card) Validate() error {
+
+	validations := []strategy.ValidationStep{
+		strategy.IDValidation{},
+		strategy.ErrNameIsRequired{},
+		strategy.ErrCardTypeIsRequired{},
+		strategy.ErrCardLevelIsRequired{},
+		strategy.ErrCardPriceIsRequired{},
+		strategy.ErrCardPriceInvalid{},
+	}
+
+	for _, validation := range validations {
+		if err := validation.Validate(c); err != nil {
+			return err
+		}
+	}
+
+	return nil
+
+}

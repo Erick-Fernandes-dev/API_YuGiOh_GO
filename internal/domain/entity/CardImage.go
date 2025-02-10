@@ -1,6 +1,8 @@
 package entity
 
-import "API_YuGiOh/pkg/entity"
+import (
+	"github.com/Erick-Fernandes-dev/API_YuGiOh_GO/pkg/entity"
+)
 
 type CardImage struct {
 	ID            entity.ID `json:"id"`

@@ -1,8 +1,9 @@
 package entity
 
 import (
-	"API_YuGiOh/internal/application/validation"
 	"testing"
+
+	"github.com/Erick-Fernandes-dev/API_YuGiOh_GO/internal/application/validation"
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"

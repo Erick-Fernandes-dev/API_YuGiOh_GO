@@ -1,4 +1,4 @@
-module API_YuGiOh
+module github.com/Erick-Fernandes-dev/API_YuGiOh_GO
 
 go 1.22.4
 
